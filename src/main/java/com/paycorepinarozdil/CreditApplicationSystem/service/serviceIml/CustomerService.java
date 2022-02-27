@@ -36,9 +36,9 @@ public class CustomerService implements ICustomerService {
 
     @Override //kontrol et customerda tc yi request bodye yazmadan nasıl update ederim bak.
     public Customer updateCustomerByIdentity(String identityNumber,Customer customer) {
-      Customer customer1 = getCustomerByIdentity(identityNumber);
-      customer.setId(customer1.getId());
-      customer.setCreateDate(customer1.getCreateDate());
+      Customer existCustomer = getCustomerByIdentity(identityNumber);
+      customer.setId(existCustomer.getId());
+      customer.setCreateDate(existCustomer.getCreateDate());
       customer.setUpdateDate(Date.valueOf(LocalDate.now()));
       customerDal.save(customer);
       return customer;

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Credit Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var apiAddress = $("#fapi").val();
+
+            $("#createCustomer").click(function (event) {
+                if (!ValidateCustomerForm()) {
+                    return;
+                }
+                event.preventDefault();
+                var customerServiceAddress = "/customer/add";
+                var customerName = $("#cusName").val();
+                var cusSurName = $("#cusSurName").val();
+                var tcNo = $("#tcNo").val();
+                var salary = $("#salary").val();
+                var phoneNumber = $("#phone").val();
+
+                console.log(cusSurName, customerName, tcNo, salary, phoneNumber);
+                $.ajax({
+                    type: 'POST',
+                    url: apiAddress + customerServiceAddress,
+                     //dataType: JSON,
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        identityNumber: tcNo,
+                        firstname: customerName,
+                        lastname: cusSurName,
+                        salary: salary,
+                        phone: phoneNumber
+                    }),
+                    success: function (data) {
+                        alert(JSON.stringify(data));
+                    },
+                    error: function (e) {
+                        alert("error :" + JSON.stringify(e.responseJSON))
+                    },
+                    complete: function (data) {
+                        ClearCustomerForm();
+                    }                
+                });
+            });
+            function isEmpty(value) {
+                return !value.trim().length;
+            }
+            function ValidateCustomerForm() {
+                var a = document.forms["customerForm"]["tcNo"].value;
+                var b = document.forms["customerForm"]["salary"].value;
+                var c = document.forms["customerForm"]["phone"].value;
+                var d = document.forms["customerForm"]["cusSurName"].value;
+                var d = document.forms["customerForm"]["cusName"].value;
+
+                if (isEmpty(a) || isEmpty(b) || isEmpty(c) || isEmpty(d)) {
+                    alert("Please Fill All Required Field");
+                    return false;
+                }
+                return true;
+            }
+            function ClearCustomerForm() {
+                document.forms["customerForm"]["tcNo"].value = "";
+                document.forms["customerForm"]["salary"].value = "";
+                document.forms["customerForm"]["phone"].value = "";
+                document.forms["customerForm"]["cusSurName"].value = "";
+                document.forms["customerForm"]["cusName"].value = "";
+            }
+            $("#createCredit").click(function (event) {
+                if (isEmpty($("#tcNoForRequest").val())) {
+                    alert("Tc No Giriniz");
+                    return;
+                }
+                event.preventDefault();
+                var tcNo = $("#tcNoForRequest").val();
+                var addCredit = "/credit-application/add/"
+                $.ajax({
+                    type: 'POST',
+                    url: apiAddress + addCredit + tcNo,
+                    contentType: "application/json",
+                    success: function (data) {
+                        alert(JSON.stringify(data));
+                    },
+                    error: function (e) {
+                        alert("error :" + JSON.stringify(e.responseJSON))
+                    },
+                    complete: function (data) {
+                        $("#tcNoForRequest").val("")
+                    }
+                });
+            });
+
+            $("#resultCredit").click(function (event) {
+                if (isEmpty($("#tcNoForResult").val())) {
+                    alert("Tc No Giriniz");
+                    return;
+                }
+                event.preventDefault();
+                var tcNo = $("#tcNoForResult").val();
+                var resultCredit = "/credit-result/get/"
+                $.ajax({
+                    type: 'GET',
+                    url: apiAddress + resultCredit + tcNo,
+                    contentType: "application/json",
+                    success: function (data) {
+                        alert(JSON.stringify(data));
+                    },
+                    error: function (e) {
+                        alert("error :" + JSON.stringify(e.responseJSON))
+                    },
+                    complete: function (data) {
+                        $("#tcNoForResult").val("")
+                    }
+                });
+            });
+
+        });
+
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Kredi Başvuru Merkezi</h1>
+        <label for="fapi">Api Adresi:</label>
+        <br>
+
+        <input type="text" id="fapi" name="fapi" size="100" value="http://localhost:8080/api">
+        <ul class="nav nav-pills">
+            <li class="active">
+                <a href="#customer" data-toggle="tab">Müşteri Oluştur</a>
+            </li>
+            <li>
+                <a href="#creditF" data-toggle="tab">Kredi Başvurusu</a>
+            </li>
+            <li>
+                <a href="#creditR" data-toggle="tab">Kredi Sonuç Görüntüleme</a>
+            </li>
+            <li>
+                <a href="#info" data-toggle="tab">Bilgilendirme</a>
+            </li>
+        </ul>
+
+        <div class="tab-content clearfix">
+            <div class="tab-pane active" id="customer">
+                <form role="form" id="customerForm" onsubmit="validateForm()" action="">
+                    <div class="form-group">
+                        <label for="customerName">Müşteri Adı:</label>
+                        <input type="text" class="form-control" id="cusName" name="cusName" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerName">Müşteri Soyadi:</label>
+                        <input type="text" class="form-control" id="cusSurName" name="cusSurName" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="tcNo">Tc No:</label>
+                        <input type="text" class="form-control" id="tcNo" name="tcNo" required="required" size="11">
+                    </div>
+                    <div class="form-group">
+                        <label for="salary">Aylık Gelir:</label>
+                        <input type="number" class="form-control" id="salary" name="salary" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber">Telefon Numarası:</label><br>
+                        <input type="tel" id="phone" name="phone" placeholder="05555555555"
+                            pattern="[0][0-9]{10}" required><span>Format: 05555555555 </span>
+                    </div>
+                    <button id="createCustomer" type="button" class="btn btn-default">Müşteri Kaydı Oluştur</button>
+                </form>
+            </div>
+            <div class="tab-pane" id="creditF">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="tcNo">Tc No:</label>
+                        <input type="number" class="form-control" id="tcNoForRequest" size="11">
+                    </div>
+                    <button id="createCredit" type="button" class="btn btn-default">Kredi Talebi Oluştur</button>
+                </form>
+            </div>
+            <div class="tab-pane" id="creditR">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="tcNo">Tc No:</label>
+                        <input type="number" class="form-control" id="tcNoForResult" size="11">
+                    </div>
+                    <button id="resultCredit" type="button" class="btn btn-default">Kredi Sonucu Görüntüle</button>
+                </form>
+            </div>
+            <div class="tab-pane" id="info">
+                <ul class="list-group">
+                    <li class="list-group-item">*Local Ortamda veya sunucu üzerinde projeyi çalıştırdıktan sonra
+                        endpoint adresi girilerek form aksiyonları çalışır.</li>
+                    <li class="list-group-item">Default localhost:8080/api olarak set edilmiştir.İsteğe göre
+                        değişebilir.</li>
+                    <li class="list-group-item">Çalışma Mantığı
+                        <ul>
+                            <li>Müşteri Oluşturulur.</li>
+                            <li>Kredi Talebi Girilir.</li>
+                            <li>Aktif Talebi varsa, tekrardan kredi talebi oluşturulamaz.</li>
+                            <li>Talep Sonucu görüntülenir.</li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item"><a href="http://localhost:8080/swagger-ui.html">Api Check for Swagger(For :localhost)</a>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

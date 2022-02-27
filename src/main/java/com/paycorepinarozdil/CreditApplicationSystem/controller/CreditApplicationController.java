@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/credit-application")
 @Controller
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CreditApplicationController {
 
     @Autowired
@@ -26,6 +27,7 @@ public class CreditApplicationController {
 
     @GetMapping(value = "/get/{identityNumber}")
     public CreditApplication getCreditApplication(@PathVariable String identityNumber){
+
         return creditApplicationService.getCreditApplicationByIdentityNumber(identityNumber);
     }
 }

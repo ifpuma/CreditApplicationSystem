@@ -1,5 +1,7 @@
 package com.paycorepinarozdil.CreditApplicationSystem.service;
 
+import com.paycorepinarozdil.CreditApplicationSystem.exception.NotFoundException;
+import com.paycorepinarozdil.CreditApplicationSystem.exception.UnfinishedApplicationException;
 import com.paycorepinarozdil.CreditApplicationSystem.model.entity.CreditApplication;
 import com.paycorepinarozdil.CreditApplicationSystem.model.entity.Customer;
 import com.paycorepinarozdil.CreditApplicationSystem.model.entity.CustomerCreditScore;
@@ -39,7 +41,6 @@ public class CreditApplicationServiceTest {
 
     @Test
     void createCreditApplication_successful() {
-        //CreditApplication creditApplication1 = new CreditApplication(1,0,new Date(),new Date(),new Customer());
 
         Customer customer = new Customer(1,"12345678912","Pınar","Özdil",5500.00,"05397607208",new Date(),new Date(),new CustomerCreditScore(), new ArrayList<>());
 
@@ -63,8 +64,16 @@ public class CreditApplicationServiceTest {
     }
 
     @Test
-    void createCreditApplication_not_found(){
+    void createCreditApplication_unfinished_application(){
+//        CreditApplication creditApplication = new CreditApplication(1,0,new Date(),new Date(),new Customer());
+//
+//        Customer customer = new Customer(1,"12345678912","Pınar","Özdil",5500.00,"05397607208",new Date(),new Date(),new CustomerCreditScore(), Arrays.asList(creditApplication));
+//
+//        CreditApplication updatedCreditApplication = new CreditApplication(1,0,new Date(),new Date(),customer);
+//
+//        when(creditApplicationService.createCreditApplication("12345678912")).thenThrow(UnfinishedApplicationException.class);
 
     }
+
 
 }

@@ -41,9 +41,10 @@ public class CreditApplicationService implements ICreditApplicationService {
 
     @Override
     public void updateCreditApplication(String identityNumber,Integer applicationStatus) {
-        CreditApplication creditApplication1 = getCreditApplicationByIdentityNumber(identityNumber);
-        creditApplication1.setApplicationStatus(applicationStatus);
-        creditApplicationDal.save(creditApplication1);
+        CreditApplication creditApplication = getCreditApplicationByIdentityNumber(identityNumber);
+        creditApplication.setApplicationStatus(applicationStatus);
+        creditApplication.setUpdateDate(java.sql.Date.valueOf(LocalDate.now()));
+        creditApplicationDal.save(creditApplication);
     }
 
     @Override
