@@ -43,6 +43,7 @@ spring.datasource.url=jdbc:postgresql://host.docker.internal:5432/CreditApplicat
 ### Then run these codes
 
 `docker-compose build`
+
 `docker-compose up`
 
 
