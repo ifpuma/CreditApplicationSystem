@@ -46,10 +46,10 @@ public class Customer implements Serializable {
     private String phone;
 
     @Column(name = "create_date")
-    private Date createDate = java.sql.Date.valueOf(LocalDate.now());
+    private Date createDate ;
 
     @Column(name = "update_date")
-    private Date updateDate = java.sql.Date.valueOf(LocalDate.now());
+    private Date updateDate ;
 
     @JsonIgnore
     @OneToOne(mappedBy = "customer", cascade = CascadeType.REMOVE)

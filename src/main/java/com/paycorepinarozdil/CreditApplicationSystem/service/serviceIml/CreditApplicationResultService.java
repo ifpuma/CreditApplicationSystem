@@ -8,6 +8,8 @@ import com.paycorepinarozdil.CreditApplicationSystem.service.ICreditApplicationR
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -49,6 +51,9 @@ public class CreditApplicationResultService implements ICreditApplicationResultS
 
     @Override
     public CreditApplicationResult getCreditApplicationResultByIdentityNumber(String identityNumber) {
+       // creditApplicationService.getCreditApplicationByIdentityNumber(identityNumber).getApplicationStatus().
+         //   if(   ){
+        //}
     customerCreditScore = customerCreditScoreService.getCreditScoreByIdentityNumber(identityNumber);
        if(customerCreditScore.getCreditScore()<500)
            getResultNo(creditApplicationService.getCreditApplicationByIdentityNumber(identityNumber));
@@ -61,7 +66,8 @@ public class CreditApplicationResultService implements ICreditApplicationResultS
     @Override
     public CreditApplicationResult getResultYes(CreditApplication creditApplication) {
         creditApplicationResult.setCreditApplication(creditApplication);
-        creditApplicationResult.setCreditResult("Y");
+        creditApplicationResult.setCreditResult("Onay");
+        creditApplicationResult.setCreateDate(Date.valueOf(LocalDate.now()));
         if(customerCreditScore.getCreditScore()>=500&&customerCreditScore.getCreditScore()<1000){
             if(customerCreditScore.getCustomer().getSalary()<5000){
                 creditApplicationResult.setCreditLimit(10000);
@@ -80,7 +86,8 @@ public class CreditApplicationResultService implements ICreditApplicationResultS
     @Override
     public CreditApplicationResult getResultNo(CreditApplication creditApplication) {
             creditApplicationResult.setCreditApplication(creditApplication);
-            creditApplicationResult.setCreditResult("N");
+            creditApplicationResult.setCreditResult("Red");
+        creditApplicationResult.setCreateDate(Date.valueOf(LocalDate.now()));
         creditApplicationResultDal.save(creditApplicationResult);
         return creditApplicationResult;
     }

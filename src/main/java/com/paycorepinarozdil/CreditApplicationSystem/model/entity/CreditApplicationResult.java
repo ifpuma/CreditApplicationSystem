@@ -26,15 +26,12 @@ public class CreditApplicationResult implements Serializable {
     @Column(name = "credit_limit")
     private double creditLimit;
 
-    @NotNull(message = "credit limit can not be null")
+    @NotNull(message = "credit result can not be null")
     @Column(name = "credit_result")
     private String creditResult;
 
     @Column(name = "create_date")
     private Date createDate;
-
-    @Column(name = "update_date")
-    private Date updateDate;
 
     @NotNull(message = "credit application can not be null")
     @OneToOne(cascade = CascadeType.MERGE)
