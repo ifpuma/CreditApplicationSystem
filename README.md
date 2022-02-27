@@ -24,14 +24,14 @@ and HTML for frontend.
 I preferred Layered Architecture Pattern because this pattern can provides
 to write organized code.
 
-## Frontend
+## Frontend link after run this project
 
-[Frontend link after run this project](http://localhost:8080)
+[Frontend](http://localhost:8080)
 
 
-## Swagger
+## Swagger link
 
-[Swagger Link](http://localhost:8080/swagger-ui.html)
+[Swagger](http://localhost:8080/swagger-ui.html)
 
 
 
