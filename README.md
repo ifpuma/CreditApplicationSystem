@@ -19,7 +19,7 @@ application status will be 1 and this application also stored in
 Credit Application Result table. 
 
 I used Spring Boot framework for backend, PostgreSQL for database 
-and HTML for frontend.
+and HTML for frontend, also Docker is added.
 
 I preferred Layered Architecture Pattern because this pattern can provides
 to write organized code.
@@ -33,6 +33,17 @@ to write organized code.
 
 [Swagger](http://localhost:8080/swagger-ui.html)
 
+
+## Docker codes
+
+### Firstly, application.properties must be changed like below :
+
+spring.datasource.url=jdbc:postgresql://host.docker.internal:5432/CreditApplicationSystem
+
+### Then run these codes
+
+`docker-compose build`
+`docker-compose up`
 
 
 
