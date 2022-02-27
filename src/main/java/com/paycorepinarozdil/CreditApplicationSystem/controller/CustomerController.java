@@ -26,10 +26,6 @@ public class CustomerController {
     private CustomerService customerService;
     private static final CustomerMapper CUSTOMER_MAPPER = Mappers.getMapper(CustomerMapper.class);
 
-    //@GetMapping(value="/{id}")
-    //public Customer getCustomer(@PathVariable @Min(1) Integer id){
-    //    return customerService.getCustomer(id);
-    //}
 
     @GetMapping(value="/identity/{identityNumber}")
     public CustomerDTO getCustomerByIdentity(@PathVariable String identityNumber){
@@ -46,14 +42,6 @@ public class CustomerController {
         return CUSTOMER_MAPPER.toDto(customerService.addCustomer(CUSTOMER_MAPPER.toEntity(customerDTO)));
     }
 
-//    @PostMapping(value = "/add/{identityNumber}")
-//    public Boolean createCreditApplication(@Valid @RequestBody CreditApplicationDTO creditApplicationDTO){
-//        // CreditApplication creditApplication = CREDIT_APPLICATION_MAPPER.toEntity(creditApplicationDTO);
-//        if(creditApplicationService.getCreditApplicationByIdentityNumber(creditApplicationDTO.getCustomer().getIdentityNumber()).getApplicationStatus()==0){
-//            throw new UnfinishedApplicationException("Credit Application");
-//        }
-//        return creditApplicationService.createCreditApplication(CREDIT_APPLICATION_MAPPER.toEntity(creditApplicationDTO));
-//    }
 
     @GetMapping (value = "/delete/{identityNumber}")
     public Boolean deleteCustomer(@PathVariable String identityNumber){
