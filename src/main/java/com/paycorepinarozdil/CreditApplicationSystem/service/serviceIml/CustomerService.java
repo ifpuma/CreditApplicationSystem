@@ -9,6 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 @RequiredArgsConstructor
 @Service
 public class CustomerService implements ICustomerService {
@@ -35,6 +38,8 @@ public class CustomerService implements ICustomerService {
     public Customer updateCustomerByIdentity(String identityNumber,Customer customer) {
       Customer customer1 = getCustomerByIdentity(identityNumber);
       customer.setId(customer1.getId());
+      customer.setCreateDate(customer1.getCreateDate());
+      customer.setUpdateDate(Date.valueOf(LocalDate.now()));
       customerDal.save(customer);
       return customer;
     }
@@ -44,7 +49,8 @@ public class CustomerService implements ICustomerService {
     if(customerDal.getCustomerByIdentity(customer.getIdentityNumber()).isPresent()) {
         throw new AlreadyUsedException(customer.getIdentityNumber());
     }
-
+        customer.setCreateDate(Date.valueOf(LocalDate.now()));
+        customer.setUpdateDate(Date.valueOf(LocalDate.now()));
         customerDal.save(customer);
         customerCreditScoreService.addCreditScore(customer);
         return customer;

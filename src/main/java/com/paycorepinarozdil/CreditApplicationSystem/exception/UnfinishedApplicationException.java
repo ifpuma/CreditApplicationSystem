@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
 public class UnfinishedApplicationException extends RuntimeException{
     public UnfinishedApplicationException(String message){
-        super("There is an unfinished "+ message + ". Please go Application Result first !");
+        super("There is an not viewed "+ message + ". Please go Application Result first !");
     }
 }

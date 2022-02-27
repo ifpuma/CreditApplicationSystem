@@ -30,11 +30,8 @@ public class CreditApplicationServiceTest {
     @Mock
     private CreditApplicationDal creditApplicationDal;
 
-    @Mock //hiç kullanmadık
+    @Mock
     private CustomerService customerService;
-
-    @Mock // HİÇ KULLANMADIK
-    private CustomerCreditScoreService customerCreditScoreService;
 
     @InjectMocks
     private CreditApplicationService creditApplicationService;

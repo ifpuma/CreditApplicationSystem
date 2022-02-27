@@ -27,20 +27,22 @@ public class Customer implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull(message = "identity number can not be null")
+    @NotBlank(message = "identity number can not be null")
     @Column(name = "identity_number",unique = true)
+    @Pattern(regexp ="[1-9][0-9]{10}")
     private String identityNumber;
 
-    @NotNull(message = "firstname can not be null")
+    @NotBlank(message = "firstname can not be null")
     private String firstname;
 
-    @NotNull(message = "lastname can not be null")
+    @NotBlank(message = "lastname can not be null")
     private String lastname;
 
     @NotNull(message = "salary can not be null")
     private double salary;
 
-    @NotNull(message = "phone can not be null")
+    @NotBlank(message = "phone can not be null")
+    @Pattern(regexp ="[0][0-9]{10}")
     private String phone;
 
     @Column(name = "create_date")
