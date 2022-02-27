@@ -43,7 +43,6 @@ public class CustomerController {
 
     @PostMapping (value = "/add")
     public CustomerDTO addCustomer(@Valid @RequestBody CustomerDTO customerDTO){
-        ResponseEntity.badRequest().body(new ValidationException());
         return CUSTOMER_MAPPER.toDto(customerService.addCustomer(CUSTOMER_MAPPER.toEntity(customerDTO)));
     }
 
