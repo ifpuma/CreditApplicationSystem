@@ -36,7 +36,7 @@ to write organized code.
 
 ## Docker codes
 
-### Firstly, application.properties must be changed like below :
+### Firstly, application.properties must be changed like below 
 
 spring.datasource.url=jdbc:postgresql://host.docker.internal:5432/CreditApplicationSystem
 
