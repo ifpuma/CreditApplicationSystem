@@ -6,7 +6,6 @@ import com.paycorepinarozdil.CreditApplicationSystem.model.entity.CreditApplicat
 import com.paycorepinarozdil.CreditApplicationSystem.model.entity.Customer;
 import com.paycorepinarozdil.CreditApplicationSystem.model.entity.CustomerCreditScore;
 import com.paycorepinarozdil.CreditApplicationSystem.repository.CustomerDal;
-import com.paycorepinarozdil.CreditApplicationSystem.service.serviceIml.CustomerCreditScoreService;
 import com.paycorepinarozdil.CreditApplicationSystem.service.serviceIml.CustomerService;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;

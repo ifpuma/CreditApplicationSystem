@@ -2,8 +2,6 @@ package com.paycorepinarozdil.CreditApplicationSystem.model.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.paycorepinarozdil.CreditApplicationSystem.model.entity.CreditApplication;
-import com.paycorepinarozdil.CreditApplicationSystem.model.entity.CustomerCreditScore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

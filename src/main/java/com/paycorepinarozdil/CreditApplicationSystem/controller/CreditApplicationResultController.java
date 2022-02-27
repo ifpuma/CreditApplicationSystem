@@ -1,7 +1,6 @@
 package com.paycorepinarozdil.CreditApplicationSystem.controller;
 
 import com.paycorepinarozdil.CreditApplicationSystem.model.CreditApplicationResultDTO;
-import com.paycorepinarozdil.CreditApplicationSystem.model.entity.CreditApplicationResult;
 import com.paycorepinarozdil.CreditApplicationSystem.model.mapper.CreditApplicationResultMapper;
 import com.paycorepinarozdil.CreditApplicationSystem.service.serviceIml.CreditApplicationResultService;
 import lombok.RequiredArgsConstructor;

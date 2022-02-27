@@ -12,7 +12,6 @@ public interface CreditApplicationDal extends JpaRepository<CreditApplication,In
 
     @Query("SELECT ca FROM CreditApplication ca JOIN ca.customer c WHERE c.identityNumber = :identityNumber")
     Optional<CreditApplication> getCreditApplicationByIdentity(String identityNumber);
-    //String createCreditApplication(String identityNumber);
 
 
 }

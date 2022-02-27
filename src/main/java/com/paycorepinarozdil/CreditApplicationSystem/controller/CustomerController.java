@@ -1,8 +1,6 @@
 package com.paycorepinarozdil.CreditApplicationSystem.controller;
 
-import com.paycorepinarozdil.CreditApplicationSystem.exception.ValidationException;
 import com.paycorepinarozdil.CreditApplicationSystem.model.CustomerDTO;
-import com.paycorepinarozdil.CreditApplicationSystem.model.entity.Customer;
 import com.paycorepinarozdil.CreditApplicationSystem.model.mapper.CustomerMapper;
 import com.paycorepinarozdil.CreditApplicationSystem.service.serviceIml.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor

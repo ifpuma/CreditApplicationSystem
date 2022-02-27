@@ -1,6 +1,5 @@
 package com.paycorepinarozdil.CreditApplicationSystem.service;
 
-import com.paycorepinarozdil.CreditApplicationSystem.model.entity.CreditApplication;
 import com.paycorepinarozdil.CreditApplicationSystem.model.entity.Customer;
 import com.paycorepinarozdil.CreditApplicationSystem.model.entity.CustomerCreditScore;
 import com.paycorepinarozdil.CreditApplicationSystem.repository.CustomerCreditScoreDal;

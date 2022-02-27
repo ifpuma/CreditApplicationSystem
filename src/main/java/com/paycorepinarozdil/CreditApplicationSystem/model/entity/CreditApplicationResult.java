@@ -1,6 +1,5 @@
 package com.paycorepinarozdil.CreditApplicationSystem.model.entity;
 
-import com.paycorepinarozdil.CreditApplicationSystem.model.entity.CreditApplication;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -12,6 +12,5 @@ public interface CustomerCreditScoreDal extends JpaRepository<CustomerCreditScor
 
     @Query("SELECT cc FROM CustomerCreditScore cc JOIN cc.customer c WHERE c.identityNumber = :identityNumber")
     Optional<CustomerCreditScore> getCreditScoreByIdentity(String identityNumber);
-    //String createCreditApplication(String identityNumber);
 
 }

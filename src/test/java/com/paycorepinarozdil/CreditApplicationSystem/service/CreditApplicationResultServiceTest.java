@@ -28,6 +28,8 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 public class CreditApplicationResultServiceTest {
 
+    @Mock
+    CreditApplicationResultDal creditApplicationResultDal;
 
     @Mock
     CreditApplicationService creditApplicationService;
