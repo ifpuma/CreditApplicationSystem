@@ -6,11 +6,7 @@ import com.paycorepinarozdil.CreditApplicationSystem.model.entity.CreditApplicat
 import java.util.List;
 
 public interface ICreditApplicationResultService {
-    List<CreditApplicationResult> getAllCreditApplicationResults();
-    CreditApplicationResult getCreditApplicationResult(Integer id);
-    CreditApplicationResult addCreditApplicationResult(CreditApplicationResult creditApplicationResult);
-    CreditApplicationResult updateCreditApplicationResult(CreditApplicationResult creditApplicationResult);
-    Boolean deleteCreditApplicationResult(Integer id);
+
     CreditApplicationResult getCreditApplicationResultByIdentityNumber(String identityNumber);
     CreditApplicationResult getResultYes(CreditApplication creditApplication);
     CreditApplicationResult getResultNo(CreditApplication creditApplication);

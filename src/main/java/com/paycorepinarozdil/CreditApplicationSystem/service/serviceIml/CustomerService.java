@@ -18,23 +18,15 @@ public class CustomerService implements ICustomerService {
 
     @Autowired
     private CustomerDal customerDal;
-    private final CustomerCreditScoreService customerCreditScoreService;
-
-   // @Override
-   // public List<Customer> getAllCustomers() { return customerDal.findAll();  }
-
-    //@Override
-    //public Customer getCustomer(Integer id) {
-    //    Optional<Customer> customerById = customerDal.findById(id);
-    //    return customerById.orElseThrow(()-> new NotFoundException("Customer"));
-    //}
+    @Autowired
+    private CustomerCreditScoreService customerCreditScoreService;
 
     @Override
     public Customer getCustomerByIdentity(String identityNumber) {
       return customerDal.getCustomerByIdentity(identityNumber).stream().findFirst().orElseThrow(()->new NotFoundException("Customer"));
     }
 
-    @Override //kontrol et customerda tc yi request bodye yazmadan nasıl update ederim bak.
+    @Override
     public Customer updateCustomerByIdentity(String identityNumber,Customer customer) {
       Customer existCustomer = getCustomerByIdentity(identityNumber);
       customer.setId(existCustomer.getId());
@@ -44,7 +36,7 @@ public class CustomerService implements ICustomerService {
       return customer;
     }
 
-    @Override //if kalkabilir mi ?
+    @Override
     public Customer addCustomer(Customer customer) {
     if(customerDal.getCustomerByIdentity(customer.getIdentityNumber()).isPresent()) {
         throw new AlreadyUsedException(customer.getIdentityNumber());

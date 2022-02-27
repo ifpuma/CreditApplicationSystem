@@ -16,12 +16,10 @@ public class CustomerCreditScoreService implements ICustomerCreditScoreService {
     @Autowired
     private CustomerCreditScoreDal customerCreditScoreDal;
 
-
-
     @Override
     public Boolean addCreditScore(Customer customer) {
         SplittableRandom splittableRandom = new SplittableRandom();
-        int randomWithSplittableRandom = splittableRandom.nextInt(0, 2000);
+        int randomWithSplittableRandom = splittableRandom.nextInt(1, 2000);
         CustomerCreditScore customerCreditScore = new CustomerCreditScore();
         customerCreditScore.setCreditScore(randomWithSplittableRandom);
         customerCreditScore.setCustomer(customer);

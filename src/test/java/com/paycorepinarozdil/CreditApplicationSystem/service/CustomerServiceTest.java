@@ -27,38 +27,9 @@ public class CustomerServiceTest {
 @Mock
     private CustomerDal customerDal;
 
-    @Mock // HİÇ KULLANMADIK
-    private CustomerCreditScoreService customerCreditScoreService;
-
 @InjectMocks
     private CustomerService customerService;
 
-//@Test
-//    void getAllCustomers() {
-//    List<Customer> expectedCustomers = Arrays.asList(
-//            new Customer(1,"12345678912","Pınar","Özdil",5500.00,"05397607208",new Date(),new Date()),
-//            new Customer(2,"98765432121","Bihter","Özdil",9500.00,"05326609908",new Date(),new Date()),
-//            new Customer(3,"52369874156","Lale","Özdil",4500.00,"05367896532",new Date(),new Date()),
-//            new Customer(4,"14725836914","Furkan","Demir",10000.00,"05391237224",new Date(),new Date())
-//    );
-//
-//    when(customerDal.findAll()).thenReturn(expectedCustomers);
-//
-//    List<Customer> allCustomers = customerService.getAllCustomers();
-//
-//    Assert.assertEquals(expectedCustomers.size(),allCustomers.size());
-//    for(Customer expected : expectedCustomers){
-//        Optional<Customer> actualCustomer = allCustomers.stream().filter(customer -> customer.getId()==expected.getId()).findFirst();
-//        Assert.assertEquals(expected.getIdentityNumber(),actualCustomer.get().getIdentityNumber());
-//        Assertions.assertEquals(expected.getSalary(),actualCustomer.get().getSalary());
-//        Assert.assertEquals(expected.getFirstname(),actualCustomer.get().getFirstname());
-//        Assert.assertEquals(expected.getLastname(),actualCustomer.get().getLastname());
-//        Assert.assertEquals(expected.getPhone(),actualCustomer.get().getPhone());
-//        Assert.assertEquals(expected.getCreateDate(),actualCustomer.get().getCreateDate());
-//        Assert.assertEquals(expected.getUpdateDate(),actualCustomer.get().getUpdateDate());
-//
-//    }
-//}
 
 @Test
     void getCustomer_successful(){

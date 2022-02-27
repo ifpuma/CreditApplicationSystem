@@ -21,44 +21,17 @@ public class CreditApplicationResultService implements ICreditApplicationResultS
     @Autowired
     private CustomerCreditScoreService customerCreditScoreService;
 
-    @Override
-    public List<CreditApplicationResult> getAllCreditApplicationResults() {
-        return null;
-    }
-
-    @Override
-    public CreditApplicationResult getCreditApplicationResult(Integer id) {
-        return null;
-    }
-
-    @Override
-    public CreditApplicationResult addCreditApplicationResult(CreditApplicationResult creditApplicationResult) {
-        return null;
-    }
-
-    @Override
-    public CreditApplicationResult updateCreditApplicationResult(CreditApplicationResult creditApplicationResult) {
-        return null;
-    }
-
-    @Override
-    public Boolean deleteCreditApplicationResult(Integer id) {
-        return null;
-    }
-
     CreditApplicationResult creditApplicationResult = new CreditApplicationResult();
     CustomerCreditScore customerCreditScore = new CustomerCreditScore();
 
     @Override
     public CreditApplicationResult getCreditApplicationResultByIdentityNumber(String identityNumber) {
-       // creditApplicationService.getCreditApplicationByIdentityNumber(identityNumber).getApplicationStatus().
-         //   if(   ){
-        //}
+    CreditApplication creditApplication = creditApplicationService.getCreditApplicationByIdentityNumber(identityNumber);
     customerCreditScore = customerCreditScoreService.getCreditScoreByIdentityNumber(identityNumber);
        if(customerCreditScore.getCreditScore()<500)
-           getResultNo(creditApplicationService.getCreditApplicationByIdentityNumber(identityNumber));
+           getResultNo(creditApplication);
        else
-           getResultYes(creditApplicationService.getCreditApplicationByIdentityNumber(identityNumber));
+           getResultYes(creditApplication);
        creditApplicationService.updateCreditApplication(identityNumber,1);
        return creditApplicationResult;
     }

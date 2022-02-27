@@ -24,32 +24,11 @@ public class CreditApplicationService implements ICreditApplicationService {
     private CustomerService customerService;
 
     @Override
-    public List<CreditApplication> getAllCreditApplications() {
-        return null;
-    }
-
-    @Override
-    public CreditApplication getCreditApplication(Integer id) {
-        return null;
-    }
-
-    @Override
-    public CreditApplication addCreditApplication(CreditApplication creditApplication) {
-
-        return null;
-    }
-
-    @Override
     public void updateCreditApplication(String identityNumber,Integer applicationStatus) {
         CreditApplication creditApplication = getCreditApplicationByIdentityNumber(identityNumber);
         creditApplication.setApplicationStatus(applicationStatus);
         creditApplication.setUpdateDate(java.sql.Date.valueOf(LocalDate.now()));
         creditApplicationDal.save(creditApplication);
-    }
-
-    @Override
-    public void deleteCreditApplication(String identityNumber) {
-        creditApplicationDal.delete(getCreditApplicationByIdentityNumber(identityNumber));
     }
 
     @Override
@@ -68,8 +47,8 @@ public class CreditApplicationService implements ICreditApplicationService {
 
     @Override
     public CreditApplication getCreditApplicationByIdentityNumber(String identityNumber) {
-       // Customer customer = customerService.getCustomerByIdentity(identityNumber);
      return creditApplicationDal.getCreditApplicationByIdentity(identityNumber)
-             .filter(creditApplication -> creditApplication.getApplicationStatus()==0).orElseThrow(()->new NotFoundException("Application"));
+             .filter(creditApplication -> creditApplication.getApplicationStatus()==0).orElseThrow(()->new NotFoundException("Not Resulted Application"));
     }
+
 }

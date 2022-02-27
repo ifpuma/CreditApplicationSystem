@@ -14,4 +14,5 @@ public interface CreditApplicationDal extends JpaRepository<CreditApplication,In
     Optional<CreditApplication> getCreditApplicationByIdentity(String identityNumber);
     //String createCreditApplication(String identityNumber);
 
+
 }

@@ -1,15 +1,11 @@
 package com.paycorepinarozdil.CreditApplicationSystem.service;
 
-import com.paycorepinarozdil.CreditApplicationSystem.exception.NotFoundException;
-import com.paycorepinarozdil.CreditApplicationSystem.exception.UnfinishedApplicationException;
 import com.paycorepinarozdil.CreditApplicationSystem.model.entity.CreditApplication;
 import com.paycorepinarozdil.CreditApplicationSystem.model.entity.Customer;
 import com.paycorepinarozdil.CreditApplicationSystem.model.entity.CustomerCreditScore;
 import com.paycorepinarozdil.CreditApplicationSystem.repository.CreditApplicationDal;
 import com.paycorepinarozdil.CreditApplicationSystem.service.serviceIml.CreditApplicationService;
-import com.paycorepinarozdil.CreditApplicationSystem.service.serviceIml.CustomerCreditScoreService;
 import com.paycorepinarozdil.CreditApplicationSystem.service.serviceIml.CustomerService;
-import org.checkerframework.checker.units.qual.C;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,7 +15,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -64,14 +59,34 @@ public class CreditApplicationServiceTest {
     }
 
     @Test
-    void createCreditApplication_unfinished_application(){
-//        CreditApplication creditApplication = new CreditApplication(1,0,new Date(),new Date(),new Customer());
-//
-//        Customer customer = new Customer(1,"12345678912","Pınar","Özdil",5500.00,"05397607208",new Date(),new Date(),new CustomerCreditScore(), Arrays.asList(creditApplication));
-//
-//        CreditApplication updatedCreditApplication = new CreditApplication(1,0,new Date(),new Date(),customer);
-//
-//        when(creditApplicationService.createCreditApplication("12345678912")).thenThrow(UnfinishedApplicationException.class);
+    void updateCreditApplication_successful(){
+
+      Customer customer = new Customer(1,"12345678912","Pınar","Özdil",5500.00,"05397607208",new Date(),new Date(),new CustomerCreditScore(), new ArrayList<>());
+
+      CreditApplication creditApplication = new CreditApplication(1,0,new Date(),new Date(),customer);
+
+      when(creditApplicationDal.getCreditApplicationByIdentity("12345678912")).thenReturn(Optional.of(creditApplication));
+
+      creditApplicationService.updateCreditApplication("12345678912",1);
+
+      Assert.assertEquals(creditApplication.getApplicationStatus().intValue(),1);
+
+
+    }
+
+    @Test
+    void getCreditApplication_successful(){
+
+        Customer customer = new Customer(1,"12345678912","Pınar","Özdil",5500.00,"05397607208",new Date(),new Date(),new CustomerCreditScore(), new ArrayList<>());
+
+        CreditApplication creditApplication = new CreditApplication(1,0,new Date(),new Date(),customer);
+
+        when(creditApplicationDal.getCreditApplicationByIdentity("12345678912")).thenReturn(Optional.of(creditApplication));
+
+        CreditApplication actualCreditApplication = creditApplicationService.getCreditApplicationByIdentityNumber("12345678912");
+
+        Assert.assertEquals(creditApplication,actualCreditApplication);
+
 
     }
 
