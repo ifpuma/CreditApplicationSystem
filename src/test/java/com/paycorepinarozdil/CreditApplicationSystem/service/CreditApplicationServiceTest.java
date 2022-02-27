@@ -1,6 +1,7 @@
 package com.paycorepinarozdil.CreditApplicationSystem.service;
 
 import com.paycorepinarozdil.CreditApplicationSystem.model.entity.CreditApplication;
+import com.paycorepinarozdil.CreditApplicationSystem.model.entity.CreditApplicationResult;
 import com.paycorepinarozdil.CreditApplicationSystem.model.entity.Customer;
 import com.paycorepinarozdil.CreditApplicationSystem.model.entity.CustomerCreditScore;
 import com.paycorepinarozdil.CreditApplicationSystem.repository.CreditApplicationDal;
@@ -39,7 +40,7 @@ public class CreditApplicationServiceTest {
 
         Customer customer = new Customer(1,"12345678912","Pınar","Özdil",5500.00,"05397607208",new Date(),new Date(),new CustomerCreditScore(), new ArrayList<>());
 
-        CreditApplication updatedCreditApplication = new CreditApplication(1,0,new Date(),new Date(),customer);
+        CreditApplication updatedCreditApplication = new CreditApplication(1,0,new Date(),new Date(),customer,new CreditApplicationResult());
 
         ArgumentCaptor<CreditApplication> creditApplicationArgumentCaptor = ArgumentCaptor.forClass(CreditApplication.class);
 
@@ -63,7 +64,7 @@ public class CreditApplicationServiceTest {
 
       Customer customer = new Customer(1,"12345678912","Pınar","Özdil",5500.00,"05397607208",new Date(),new Date(),new CustomerCreditScore(), new ArrayList<>());
 
-      CreditApplication creditApplication = new CreditApplication(1,0,new Date(),new Date(),customer);
+      CreditApplication creditApplication = new CreditApplication(1,0,new Date(),new Date(),customer,new CreditApplicationResult());
 
       when(creditApplicationDal.getCreditApplicationByIdentity("12345678912")).thenReturn(Optional.of(creditApplication));
 
@@ -79,7 +80,7 @@ public class CreditApplicationServiceTest {
 
         Customer customer = new Customer(1,"12345678912","Pınar","Özdil",5500.00,"05397607208",new Date(),new Date(),new CustomerCreditScore(), new ArrayList<>());
 
-        CreditApplication creditApplication = new CreditApplication(1,0,new Date(),new Date(),customer);
+        CreditApplication creditApplication = new CreditApplication(1,0,new Date(),new Date(),customer,new CreditApplicationResult());
 
         when(creditApplicationDal.getCreditApplicationByIdentity("12345678912")).thenReturn(Optional.of(creditApplication));
 

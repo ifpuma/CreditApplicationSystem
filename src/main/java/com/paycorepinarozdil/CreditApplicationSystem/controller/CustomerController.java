@@ -40,7 +40,7 @@ public class CustomerController {
     }
 
 
-    @GetMapping (value = "/delete/{identityNumber}")
+    @PostMapping (value = "/delete/{identityNumber}")
     public Boolean deleteCustomer(@PathVariable String identityNumber){
        return customerService.deleteCustomer(identityNumber);
     }

@@ -1,5 +1,6 @@
 package com.paycorepinarozdil.CreditApplicationSystem.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,7 +36,7 @@ public class CreditApplication implements Serializable {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    public CreditApplication(Customer customer) {
-        this.customer = customer;
-    }
+    @JsonIgnore
+    @OneToOne(mappedBy = "creditApplication",cascade = CascadeType.ALL)
+    private CreditApplicationResult creditApplicationResult;
 }

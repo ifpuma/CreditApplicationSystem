@@ -27,7 +27,6 @@
                 $.ajax({
                     type: 'POST',
                     url: apiAddress + customerServiceAddress,
-                     //dataType: JSON,
                     contentType: "application/json",
                     data: JSON.stringify({
                         identityNumber: tcNo,
@@ -37,14 +36,14 @@
                         phone: phoneNumber
                     }),
                     success: function (data) {
-                        alert(JSON.stringify(data));
+                        alert("Kayıt başarılı : "+JSON.stringify(data));
                     },
                     error: function (e) {
                         alert("error :" + JSON.stringify(e.responseJSON))
                     },
                     complete: function (data) {
                         ClearCustomerForm();
-                    }                
+                    }
                 });
             });
             function isEmpty(value) {
@@ -70,6 +69,90 @@
                 document.forms["customerForm"]["cusSurName"].value = "";
                 document.forms["customerForm"]["cusName"].value = "";
             }
+
+            $("#updateCustomer").click(function (event) {
+                if (!ValidateCustomerUForm()) {
+                    return;
+                }
+                event.preventDefault();
+                var customerUServiceAddress = "/customer/update/";
+                var customerNameU = $("#cusNameU").val();
+                var cusSurNameU = $("#cusSurNameU").val();
+                var tcNoU = $("#tcNoU").val();
+                var salaryU = $("#salaryU").val();
+                var phoneNumberU = $("#phoneU").val();
+
+                console.log(cusSurNameU, customerNameU, tcNoU, salaryU, phoneNumberU);
+                $.ajax({
+                    type: 'POST',
+                    url: apiAddress + customerUServiceAddress + tcNoU,
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        identityNumber: tcNoU,
+                        firstname: customerNameU,
+                        lastname: cusSurNameU,
+                        salary: salaryU,
+                        phone: phoneNumberU
+                    }),
+                    success: function (data) {
+                        alert("Güncelleme başarılı : "+JSON.stringify(data));
+                    },
+                    error: function (e) {
+                        alert("error :" + JSON.stringify(e.responseJSON))
+                    },
+                    complete: function (data) {
+                        ClearCustomerUForm();
+                    }
+                });
+            });
+            function isEmpty(value) {
+                return !value.trim().length;
+            }
+            function ValidateCustomerUForm() {
+                var a = document.forms["customerUForm"]["tcNoU"].value;
+                var b = document.forms["customerUForm"]["salaryU"].value;
+                var c = document.forms["customerUForm"]["phoneU"].value;
+                var d = document.forms["customerUForm"]["cusSurNameU"].value;
+                var d = document.forms["customerUForm"]["cusNameU"].value;
+
+                if (isEmpty(a) || isEmpty(b) || isEmpty(c) || isEmpty(d)) {
+                    alert("Please Fill All Required Field");
+                    return false;
+                }
+                return true;
+            }
+            function ClearCustomerUForm() {
+                document.forms["customerUForm"]["tcNoU"].value = "";
+                document.forms["customerUForm"]["salaryU"].value = "";
+                document.forms["customerUForm"]["phoneU"].value = "";
+                document.forms["customerUForm"]["cusSurNameU"].value = "";
+                document.forms["customerUForm"]["cusNameU"].value = "";
+            }
+
+            $("#deleteCustomer").click(function (event) {
+                if (isEmpty($("#tcNoForDelete").val())) {
+                    alert("Tc No Giriniz");
+                    return;
+                }
+                event.preventDefault();
+                var tcNo = $("#tcNoForDelete").val();
+                var deleteCredit = "/customer/delete/"
+                $.ajax({
+                    type: 'POST',
+                    url: apiAddress + deleteCredit + tcNo,
+                    contentType: "application/json",
+                    success: function (data) {
+                        alert("Silme başarılı : "+JSON.stringify(data));
+                    },
+                    error: function (e) {
+                        alert("error :" + JSON.stringify(e.responseJSON))
+                    },
+                    complete: function (data) {
+                        $("#tcNoForDelete").val("")
+                    }
+                });
+            });
+
             $("#createCredit").click(function (event) {
                 if (isEmpty($("#tcNoForRequest").val())) {
                     alert("Tc No Giriniz");
@@ -83,7 +166,7 @@
                     url: apiAddress + addCredit + tcNo,
                     contentType: "application/json",
                     success: function (data) {
-                        alert(JSON.stringify(data));
+                        alert("Başvuru başarılı : "+JSON.stringify(data));
                     },
                     error: function (e) {
                         alert("error :" + JSON.stringify(e.responseJSON))
@@ -107,7 +190,7 @@
                     url: apiAddress + resultCredit + tcNo,
                     contentType: "application/json",
                     success: function (data) {
-                        alert(JSON.stringify(data));
+                        alert("Kredi sonucu : "+ JSON.stringify(data));
                     },
                     error: function (e) {
                         alert("error :" + JSON.stringify(e.responseJSON))
@@ -133,6 +216,12 @@
         <ul class="nav nav-pills">
             <li class="active">
                 <a href="#customer" data-toggle="tab">Müşteri Oluştur</a>
+            </li>
+            <li>
+                <a href="#customerU" data-toggle="tab">Müşteri Güncelle</a>
+            </li>
+            <li>
+                <a href="#customerD" data-toggle="tab">Müşteri Sil</a>
             </li>
             <li>
                 <a href="#creditF" data-toggle="tab">Kredi Başvurusu</a>
@@ -166,10 +255,45 @@
                     </div>
                     <div class="form-group">
                         <label for="phoneNumber">Telefon Numarası:</label><br>
-                        <input type="tel" id="phone" name="phone" placeholder="05555555555"
-                            pattern="[0][0-9]{10}" required><span>Format: 05555555555 </span>
+                        <input type="tel" id="phone" name="phone" placeholder="05555555555" pattern="[0][0-9]{10}"
+                            required><span>Format: 05555555555 </span>
                     </div>
                     <button id="createCustomer" type="button" class="btn btn-default">Müşteri Kaydı Oluştur</button>
+                </form>
+            </div>
+            <div class="tab-pane" id="customerU">
+                <form role="form" id="customerUForm" onsubmit="validateForm()" action="">
+                    <div class="form-group">
+                        <label for="customerNameU">Müşteri Adı:</label>
+                        <input type="text" class="form-control" id="cusNameU" name="cusNameU" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="customerNameU">Müşteri Soyadi:</label>
+                        <input type="text" class="form-control" id="cusSurNameU" name="cusSurNameU" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="tcNoU">Tc No:</label>
+                        <input type="text" class="form-control" id="tcNoU" name="tcNoU" required="required" size="11">
+                    </div>
+                    <div class="form-group">
+                        <label for="salaryU">Aylık Gelir:</label>
+                        <input type="number" class="form-control" id="salaryU" name="salaryU" required="required">
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumberU">Telefon Numarası:</label><br>
+                        <input type="tel" id="phoneU" name="phoneU" placeholder="05555555555" pattern="[0][0-9]{10}"
+                            required><span>Format: 05555555555 </span>
+                    </div>
+                    <button id="updateCustomer" type="button" class="btn btn-default">Müşteriyi Güncelle</button>
+                </form>
+            </div>
+            <div class="tab-pane" id="customerD">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="tcNo">Tc No:</label>
+                        <input type="number" class="form-control" id="tcNoForDelete" size="11">
+                    </div>
+                    <button id="deleteCustomer" type="button" class="btn btn-default">Müşteriyi Sil</button>
                 </form>
             </div>
             <div class="tab-pane" id="creditF">
@@ -198,13 +322,14 @@
                         değiştirilebilir.</li>
                     <li class="list-group-item">Çalışma Mantığı
                         <ul>
-                            <li>Müşteri oluşturulur.</li>
+                            <li>Müşteri oluşturulur,güncellenir ya da silinir</li>
                             <li>Kredi talebi girilir.</li>
                             <li>Müşterinin aktif talebi varsa, tekrar kredi talebi oluşturamaz.</li>
                             <li>Talep sonucu görüntülenir.</li>
                         </ul>
                     </li>
-                    <li class="list-group-item"><a href="http://localhost:8080/swagger-ui.html">Api Check for Swagger(For :localhost)</a>
+                    <li class="list-group-item"><a href="http://localhost:8080/swagger-ui.html">Api Check for
+                            Swagger(For :localhost)</a>
 
                     </li>
                 </ul>

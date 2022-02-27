@@ -48,7 +48,7 @@ public class CreditApplicationResultServiceTest {
 
         CustomerCreditScore customerCreditScore = new CustomerCreditScore(1,400,customer);
 
-        CreditApplication creditApplication = new CreditApplication(1,0,null,null,customer);
+        CreditApplication creditApplication = new CreditApplication(1,0,null,null,customer,new CreditApplicationResult());
 
         CreditApplicationResult creditApplicationResult = new CreditApplicationResult(1,0,"Red", Date.valueOf(LocalDate.now()),creditApplication);
 
@@ -69,7 +69,7 @@ public class CreditApplicationResultServiceTest {
 
         CustomerCreditScore customerCreditScore = new CustomerCreditScore(1,600,customer);
 
-        CreditApplication creditApplication = new CreditApplication(1,0,null,null,customer);
+        CreditApplication creditApplication = new CreditApplication(1,0,null,null,customer,new CreditApplicationResult());
 
         CreditApplicationResult creditApplicationResult = new CreditApplicationResult(1,20000,"Onay", Date.valueOf(LocalDate.now()),creditApplication);
 
@@ -90,7 +90,7 @@ public class CreditApplicationResultServiceTest {
 
         CustomerCreditScore customerCreditScore = new CustomerCreditScore(1,400,customer);
 
-        CreditApplication creditApplication = new CreditApplication(1,0,null,null,customer);
+        CreditApplication creditApplication = new CreditApplication(1,0,null,null,customer,new CreditApplicationResult());
 
         CreditApplicationResult creditApplicationResult = new CreditApplicationResult(1,0,"Red", Date.valueOf(LocalDate.now()),creditApplication);
 

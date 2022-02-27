@@ -33,7 +33,7 @@ public class CreditApplicationResult implements Serializable {
     private Date createDate;
 
     @NotNull(message = "credit application can not be null")
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "credit_application_id")
     private CreditApplication creditApplication;
 }
